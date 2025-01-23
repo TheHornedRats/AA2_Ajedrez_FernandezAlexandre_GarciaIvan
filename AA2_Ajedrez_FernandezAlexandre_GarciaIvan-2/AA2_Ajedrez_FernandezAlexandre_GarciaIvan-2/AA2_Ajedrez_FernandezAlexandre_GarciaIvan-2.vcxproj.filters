@@ -26,5 +26,11 @@
     <ClInclude Include="Rey.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Torre.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Caballo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

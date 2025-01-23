@@ -18,7 +18,8 @@ public:
 	// a esto lo llamamos construir una clase, estamos iniciando los valores de cada una de las caracteristicas de esta clase
 
 	PiezaMadre(char color, int fila, int columna)
-		: color(color), fila(fila), columna(columna) {}
+		: color(color), fila(fila), columna(columna) {
+	}
 	// ahora vamos a añadir un método, un metódo es como otorgarle una accion a este objeto
 	//esto lo usaremos para poder definir como queremos que sea el movimiento de las piezas, pero como no queremos que tengan todas el mismo movimiento necesitamos que puedas "sobreescribir" el movimiento predeterminado
 	//para eso tenemos que hacer que el metodo sea virtual, asi las clases derivadas de esta podran adaptar el movimiento a ellas
@@ -31,4 +32,8 @@ public:
 	// esto de aquí he visto que se usa para evitar fugas de memoria, no se exactamente que són pero parece importante
 	//Creamos el DESTRUCTOR VIRTUAL
 	virtual ~PiezaMadre() {}
-#endif // !PIEZA_H
+
+
+#endif;;
+
+};

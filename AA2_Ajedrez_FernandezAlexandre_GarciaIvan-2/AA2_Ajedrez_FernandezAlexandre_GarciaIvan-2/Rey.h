@@ -2,6 +2,7 @@
 #define REY_H
 //incluyo el header donde esta la clase madre, para poder crear a su primogénito... EL REY
 #include "Piezas.h"
+
 //creo la clase Rey y indicop que es hija de la clase PiezaMadre
 
 class Rey : public PiezaMadre {

@@ -10,7 +10,7 @@ const char COLOR_BLANCO = 'B'; // Blanco
 const char COLOR_NEGRO = 'N';  // Negro
 
 // Representación para casillas vacías
-const char CASILLA_VACIA = '.';
+const char CASILLA_VACIA = '*';
 
 // Rango de filas y columnas validas en el tablero
 const  int MIN_TABLERO = 1; // Primera fila y columna (despues de los rotulos)

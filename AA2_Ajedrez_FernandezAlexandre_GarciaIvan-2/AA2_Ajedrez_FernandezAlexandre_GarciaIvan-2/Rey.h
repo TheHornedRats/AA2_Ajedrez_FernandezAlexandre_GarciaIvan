@@ -59,9 +59,59 @@ public:
 
 		}
 		return false;
-
 	}
 
+	bool EstaEnJaqueMate(PiezaMadre* tablero[HEIGHT][WIDTH]) {
+
+		for (int i = -1; i <= 1; i++){
+			for (int j = -1; j <= 1; j++){
+				if (i == 0 && j == 0) continue;
+				int NuevaFila = fila + i;
+				int NuevaColumna = columna + j;
+
+				if (NuevaFila >= 1 && NuevaFila < HEIGHT && NuevaColumna >= 1 && NuevaColumna < WIDTH)
+				{
+					if (MovimientoValido(NuevaFila, NuevaColumna, tablero)) {
+						return false;
+
+				}
+
+				}
+			}
+		}
+		for (int i = 1; i < HEIGHT; i++)
+		{
+			for (int j = 1; j < WIDTH; j++) {
+				if (tablero[i][j] != nullptr && tablero[i][j]->color == color) {}
+				{
+					for (int x = 1; x < HEIGHT; x++)
+					{
+						for (int y = 1; y < WIDTH; y++) {
+							if (tablero[i][j]->MovimientoValido(x, y, tablero))
+							{
+								PiezaMadre* piezaTemporal = tablero[x][y];
+								tablero[x][y] = tablero[i][j];
+								tablero[i][j] = nullptr;
+								bool sigueEnJaque = EstaEnJaque(fila, columna, tablero, color);
+
+								tablero[i][j] = tablero[x][y];
+								tablero[x][y] = piezaTemporal;
+								
+								if (!sigueEnJaque)
+								{
+									return false;
+								}
+
+							}
+					}
+
+					}
+				}
+		}
+
+		}
+		return true;
+	}
 };
 
 

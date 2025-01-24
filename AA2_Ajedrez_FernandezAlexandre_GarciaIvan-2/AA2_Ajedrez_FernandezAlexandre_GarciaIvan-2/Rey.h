@@ -29,6 +29,12 @@ public:
 		if (DiffFila <= 1 && DiffColumna <= 1)
 		{
 			if (NuevaFila >= 1 && NuevaFila < HEIGHT && NuevaColumna >= 1 && NuevaColumna < WIDTH) {
+				//esto comprueba que el rey no se pueda mover encima de una casilla con una pieza amiga (de su mismo color)
+				if (tablero[NuevaFila][NuevaColumna] != nullptr && tablero[NuevaFila][NuevaColumna] -> color == color)
+				{
+					return false;
+
+				}
 				return !EstaEnJaque(NuevaFila, NuevaColumna, tablero, color);
 
 		}
@@ -36,7 +42,7 @@ public:
 		}
 		return false;
 	}
-
+	//este metodo comprueva antes de moverse si la casilla en la que se va a ir el rey esta amenazada. Para hacerlo revisa todo el tablero y escoge el metodo de las fichas del color contrario para calcular si desde sus casillas actuales seria legal un movimiento a la casilla donde esta iendo el rey. Dicho de otra menera, revisar el Jaque
 	bool EstaEnJaque(int fila, int columna, PiezaMadre* tablero[HEIGHT][WIDTH], char colorRey) {
 		for (int i = 1; i < HEIGHT; i++)
 		{

@@ -1,5 +1,6 @@
 #ifndef CABALLO_H
 #define CABALLO_H
+#include "config.h"
 
 #include "Piezas.h"
 class Caballo : public PiezaMadre {
@@ -8,7 +9,7 @@ public:
 		: PiezaMadre(color, fila, columna) {
 	}
 
-	bool MovimientoValido(int NuevaFila, int NuevaColumna) override {
+	bool MovimientoValido(int NuevaFila, int NuevaColumna, PiezaMadre* tablero[HEIGHT][WIDTH]) override {
 		//Con esto calculo el numero total y absoluto de las casillas que se movera el caballo
 		int diffFila = abs(NuevaFila - fila);
 		int diffColumna = abs(NuevaColumna - columna);

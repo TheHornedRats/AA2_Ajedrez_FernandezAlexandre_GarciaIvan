@@ -1,7 +1,7 @@
 #ifndef REINA_H
 #define REINA_H
 #include "Piezas.h"
-
+#include "config.h"
 
 class Reina : public PiezaMadre {
 
@@ -11,7 +11,7 @@ public:
 	}
 
 
-	bool MovimientoValido(int NuevaFila, int NuevaColumna) override {
+	bool MovimientoValido(int NuevaFila, int NuevaColumna, PiezaMadre* tablero[HEIGHT][WIDTH]) override {
 
 		//La reina puede usar o el movimiento de la torre o la del alfil
 

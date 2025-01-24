@@ -131,6 +131,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Caballo.h" />
+    <ClInclude Include="config.h" />
+    <ClInclude Include="Peon.h" />
     <ClInclude Include="Piezas.h" />
     <ClInclude Include="Rey.h" />
     <ClInclude Include="Torre.h" />

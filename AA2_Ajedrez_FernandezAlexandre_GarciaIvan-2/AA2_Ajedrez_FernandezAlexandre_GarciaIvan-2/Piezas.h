@@ -34,6 +34,6 @@ public:
 	virtual ~PiezaMadre() {}
 
 
-#endif;;
+#endif; //PIEZAS_H
 
 };

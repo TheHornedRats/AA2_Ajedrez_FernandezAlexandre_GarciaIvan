@@ -62,19 +62,21 @@ public:
 	}
 
 	bool EstaEnJaqueMate(PiezaMadre* tablero[HEIGHT][WIDTH]) {
-
+		//este metodo revisa todos los movimientos posibles del rey para comprovar si hay alguno que le saque del jaque
 		for (int i = -1; i <= 1; i++){
 			for (int j = -1; j <= 1; j++){
 				if (i == 0 && j == 0) continue;
 				int NuevaFila = fila + i;
 				int NuevaColumna = columna + j;
-
+				//verifica la distancia
 				if (NuevaFila >= 1 && NuevaFila < HEIGHT && NuevaColumna >= 1 && NuevaColumna < WIDTH)
 				{
+					//verifica si sigue dejandolo en jaque
 					if (MovimientoValido(NuevaFila, NuevaColumna, tablero)) {
-						return false;
+						return false; //devuelve false si almenos hay una oportunidad de salir del jaque
 
 				}
+					//si el solo no puede salir del jaque se revisará en busca de alguna ficha aliada con algun movimiento posible para sacarlo del jaque
 
 				}
 			}
@@ -84,22 +86,24 @@ public:
 			for (int j = 1; j < WIDTH; j++) {
 				if (tablero[i][j] != nullptr && tablero[i][j]->color == color) {}
 				{
+					//revisa si la ficha puede hacer algun movimiento para sacar al rey del jaque
 					for (int x = 1; x < HEIGHT; x++)
 					{
 						for (int y = 1; y < WIDTH; y++) {
 							if (tablero[i][j]->MovimientoValido(x, y, tablero))
 							{
+								//simulo el movmiento para despues comprovar si el rey sigue en jaque
 								PiezaMadre* piezaTemporal = tablero[x][y];
 								tablero[x][y] = tablero[i][j];
 								tablero[i][j] = nullptr;
 								bool sigueEnJaque = EstaEnJaque(fila, columna, tablero, color);
-
+								//se devuelve el tablero a su estado normal
 								tablero[i][j] = tablero[x][y];
 								tablero[x][y] = piezaTemporal;
 
 								if (!sigueEnJaque)
 								{
-									return false;
+									return false; //devuelve falso si hay alguna pieza que podria rescatar al Rey
 								}
 							}
 						}
@@ -107,7 +111,7 @@ public:
 				}
 			}
 		}
-		return true;	
+		return true;	//Devolvera true si efectivamente el rey esta en jaque mate 
 	}
 };
 

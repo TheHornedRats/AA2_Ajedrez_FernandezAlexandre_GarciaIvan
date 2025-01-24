@@ -96,21 +96,18 @@ public:
 
 								tablero[i][j] = tablero[x][y];
 								tablero[x][y] = piezaTemporal;
-								
+
 								if (!sigueEnJaque)
 								{
 									return false;
 								}
-
 							}
-					}
-
+						}
 					}
 				}
+			}
 		}
-
-		}
-		return true;
+		return true;	
 	}
 };
 

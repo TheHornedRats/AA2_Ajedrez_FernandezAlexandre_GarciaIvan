@@ -4,7 +4,7 @@
 #include <cmath> 
 // Inluyo string para poder usar strings, sobretodo para el nombre de las clases
 #include <string> 
-
+#include "config.h"
 //Empezemos a definir las clases, pero antes una pequeña explicacion
 //Una clase es como crearle una "ficha de personaje" a un objeto en concreto, podemos cojer un peon y decir de que color es, donde se encuentra, y incluso podemos usar metodos para definir las acciones que puede tomar
 //Ahora definiremos una clase llamada Pieza, la madre de todas las clases. A partir de ella crearemos clases mas pequeñitas que seran las distinas piezas, cada una con sus especificaciones.
@@ -25,14 +25,15 @@ public:
 	//para eso tenemos que hacer que el metodo sea virtual, asi las clases derivadas de esta podran adaptar el movimiento a ellas
 
 	// aqui declaramos un bool con el que miraremos si el movimeinto que la pieza intenta hacer es valido o no
-	// el 0 al final sirve para hacer que la clase Pieza no exista como tal, la convertimos en una clase abstracta. Solo sirve para crear clases a raiz de ella
-
-	virtual bool MovimientoValido(int NuevaFila, int NuevaColumna) = 0;
-
 	//esto de aqui es una sobrecarga del metodo MovimientoValido, es necesario para que tanto el Rey como el Peon puedan usar el tablero para analizar sus movimientos
-	//de normal las piezas seguiran llamando a MovimientoValido pero las que lo necesiten podran utilizar esta
-	virtual bool MovimientoValido(int NuevaFila, int NuevaColumna, PiezaMadre* tablero[9][9]) {
-		return MovimientoValido(NuevaFila, NuevaColumna);
+	//el resto de piezas aunque no utilizen el tablero usaran este metodo para seguir validando que la casilla donde mueven no esta ocupada por una ficha amiga 
+	virtual bool MovimientoValido(int NuevaFila, int NuevaColumna, PiezaMadre* tablero[HEIGHT][WIDTH])
+	{
+		if (tablero[NuevaFila][NuevaColumna] != nullptr && tablero[NuevaFila][NuevaColumna]->color == this->color) {
+			return false;
+		}
+		return true;
+
 
 	}
 	// esto de aquí he visto que se usa para evitar fugas de memoria, no se exactamente que són pero parece importante

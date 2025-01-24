@@ -2,6 +2,8 @@
 #define REY_H
 //incluyo el header donde esta la clase madre, para poder crear a su primogénito... EL REY
 #include "Piezas.h"
+#include "config.h"
+
 
 //creo la clase Rey y indicop que es hija de la clase PiezaMadre
 
@@ -15,7 +17,7 @@ public:
 	}
 
 	//ahora creamos el metodo para comprovar el movimiento valido del rey y aprovechamos que es virtual para personalizarlo para esta clase
-	bool MovimientoValido(int NuevaFila, int NuevaColumna) override {
+	bool MovimientoValido(int NuevaFila, int NuevaColumna, PiezaMadre* tablero[HEIGHT][WIDTH]) override {
 		//con este metodo comprovamos cuantas casillas hay en medio del movimiento deseado del Rey, si hay mas de una no es un movimiento valido
 
 		int DiffFila = abs(NuevaFila - fila);
@@ -24,11 +26,38 @@ public:
 		//Ahora devolveremos si el movimiento del Rey ha sido valido, para que lo sea se tienen que cumplir dos condiciones
 		//Primero que la diferencia entre su posicion tanto en X como Y y la nueva no sea superior a 1, ya que solo se puede mover una casilla
 		//Y segundo que no termine fuera de los límites del tablero
-		return (DiffFila <= 1 && DiffColumna <= 1) &&
-			(NuevaFila >= 0 && NuevaFila < 8) &&
-			(NuevaColumna >= 0 && NuevaColumna < 8);
+		if (DiffFila <= 1 && DiffColumna <= 1)
+		{
+			if (NuevaFila >= 1 && NuevaFila < HEIGHT && NuevaColumna >= 1 && NuevaColumna < WIDTH) {
+				return !EstaEnJaque(NuevaFila, NuevaColumna, tablero, color);
+
+		}
+
+		}
+		return false;
 	}
+
+	bool EstaEnJaque(int fila, int columna, PiezaMadre* tablero[HEIGHT][WIDTH], char colorRey) {
+		for (int i = 1; i < HEIGHT; i++)
+		{
+			for (int j = 1; j < WIDTH; j++) {
+				if (tablero[i][j] != nullptr && tablero[i][j]->color != colorRey)
+				{
+					if (tablero[i][j]->MovimientoValido(fila, columna, tablero)) {
+						return true;
+
+				}
+
+				}
+		}
+
+		}
+		return false;
+
+	}
+
 };
+
 
 #endif // !REY_H
 

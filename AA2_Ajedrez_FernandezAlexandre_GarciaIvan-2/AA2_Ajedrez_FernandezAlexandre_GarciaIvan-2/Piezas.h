@@ -29,6 +29,12 @@ public:
 
 	virtual bool MovimientoValido(int NuevaFila, int NuevaColumna) = 0;
 
+	//esto de aqui es una sobrecarga del metodo MovimientoValido, es necesario para que tanto el Rey como el Peon puedan usar el tablero para analizar sus movimientos
+	//de normal las piezas seguiran llamando a MovimientoValido pero las que lo necesiten podran utilizar esta
+	virtual bool MovimientoValido(int NuevaFila, int NuevaColumna, PiezaMadre* tablero[9][9]) {
+		return MovimientoValido(NuevaFila, NuevaColumna);
+
+	}
 	// esto de aquí he visto que se usa para evitar fugas de memoria, no se exactamente que són pero parece importante
 	//Creamos el DESTRUCTOR VIRTUAL
 	virtual ~PiezaMadre() {}

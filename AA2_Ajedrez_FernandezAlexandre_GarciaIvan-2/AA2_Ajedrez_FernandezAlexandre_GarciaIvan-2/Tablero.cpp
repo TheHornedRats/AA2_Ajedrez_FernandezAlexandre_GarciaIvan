@@ -20,45 +20,57 @@ void InicializarTablero(PiezaMadre* tablero[HEIGHT][WIDTH]) {
 	}
 
 	//primero colocare los peones 
-	for (int j = 0; j < 8; j++)
+	for (int j = 0; j < WIDTH; j++)
 	{
 		//Los peones negros
-		tablero[2][j] = new Peon('N', 2, j);
+		tablero[1][j] = new Peon('N', 1, j);
 		// y los blancos
-		tablero[7][j] = new Peon('B', 7, j);
+		tablero[6][j] = new Peon('B', 6, j);
 	}
 
 	//vamos a colocar a las blancas
-	tablero[8][1] = new Torre('B', 8, 1);
-	tablero[8][8] = new Torre('B', 8, 8);
-	tablero[8][2] = new Caballo('B', 8, 2);
-	tablero[8][7] = new Caballo('B', 8, 7);
-	tablero[8][3] = new Alfil('B', 8, 3);
-	tablero[8][6] = new Alfil('B', 8, 6);
-	tablero[8][4] = new Reina('B', 8, 4);
-	tablero[8][5] = new Rey('B', 8, 5);
+	tablero[7][0] = new Torre('B', 7, 0);
+	tablero[7][7] = new Torre('B', 7, 7);
+	tablero[7][1] = new Caballo('B', 7, 1);
+	tablero[7][6] = new Caballo('B', 7, 6);
+	tablero[7][2] = new Alfil('B', 7, 2);
+	tablero[7][5] = new Alfil('B', 7, 5);
+	tablero[7][3] = new Reina('B', 7, 3);
+	tablero[7][4] = new Rey('B', 7, 4);
 
 	//turno de las negras
 
-	tablero[1][1] = new Torre('N', 1, 1);
-	tablero[1][8] = new Torre('N', 1, 8);
-	tablero[1][2] = new Caballo('N', 1, 2);
-	tablero[1][7] = new Caballo('N', 1, 7);
-	tablero[1][3] = new Alfil('N', 1, 3);
-	tablero[1][6] = new Alfil('N', 1, 6);
-	tablero[1][4] = new Reina('N', 1, 4);
-	tablero[1][5] = new Rey('N', 1, 5);
+	tablero[0][0] = new Torre('N', 0, 0);
+	tablero[0][7] = new Torre('N', 0, 7);
+	tablero[0][1] = new Caballo('N', 0, 1);
+	tablero[0][6] = new Caballo('N', 0, 6);
+	tablero[0][2] = new Alfil('N', 0, 2);
+	tablero[0][5] = new Alfil('N', 0, 5);
+	tablero[0][3] = new Reina('N', 0, 3);
+	tablero[0][4] = new Rey('N', 0, 4);
 
 }
 
 void ImprimirTablero(PiezaMadre* tablero[HEIGHT][WIDTH]) {
+	//imprime las columnas de la A a la H
+	std::cout << "  ";
+	for (int j = 0; j < WIDTH; j++)
+	{
+		std::cout << static_cast<char>('A' + j) << " ";
+	}
+	std::cout << std::endl;
+
+	
+	
 	for (int i = 0; i < HEIGHT; i++)
 	{
+		std::cout << (HEIGHT - i) << " ";
+
 		for (int j = 0; j < WIDTH; j++) {
 			if (tablero[i][j] == nullptr)
 			{
 				//relleno el tablero, este simbolo * representa las casillas vacias (nulltpr)
-				std::cout << " * ";
+				std::cout << "* ";
 			}
 			else
 			{
@@ -69,4 +81,5 @@ void ImprimirTablero(PiezaMadre* tablero[HEIGHT][WIDTH]) {
 		std::cout << std::endl;
 
 	}
+	std::cout << std::endl;
 }

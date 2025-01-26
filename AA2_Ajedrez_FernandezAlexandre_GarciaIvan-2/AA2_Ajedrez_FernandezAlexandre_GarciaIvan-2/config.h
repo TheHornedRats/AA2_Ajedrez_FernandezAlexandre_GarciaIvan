@@ -2,8 +2,8 @@
 #define CONFIG_H
 
 // Tamaño del tablero
-const int HEIGHT = 9; // 8 filas del tablero + 1 para rotulos
-const int WIDTH = 9;  // 8 columnas del tablero + 1 para rotulos
+const int HEIGHT = 8; // 8 filas del tablero + 1 para rotulos
+const int WIDTH = 8;  // 8 columnas del tablero + 1 para rotulos
 
 // Representación de colores de las piezas
 const char COLOR_BLANCO = 'B'; // Blanco

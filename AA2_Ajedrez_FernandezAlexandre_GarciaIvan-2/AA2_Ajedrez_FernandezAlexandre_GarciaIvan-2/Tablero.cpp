@@ -20,7 +20,7 @@ void InicializarTablero(PiezaMadre* tablero[HEIGHT][WIDTH]) {
 	}
 
 	//primero colocare los peones 
-	for (int j = 1; j < 8; j++)
+	for (int j = 0; j < 8; j++)
 	{
 		//Los peones negros
 		tablero[2][j] = new Peon('N', 2, j);
@@ -58,7 +58,7 @@ void ImprimirTablero(PiezaMadre* tablero[HEIGHT][WIDTH]) {
 			if (tablero[i][j] == nullptr)
 			{
 				//relleno el tablero, este simbolo * representa las casillas vacias (nulltpr)
-				std::cout << "*";
+				std::cout << " * ";
 			}
 			else
 			{

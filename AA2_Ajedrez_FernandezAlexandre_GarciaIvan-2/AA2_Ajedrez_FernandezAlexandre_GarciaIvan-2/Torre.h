@@ -2,6 +2,10 @@
 #define TORRE_H
 #include "config.h"
 #include "Piezas.h"
+
+
+
+//hereda de la clase PîezaMadre
 class Torre : public PiezaMadre {
 public:
 	Torre(char color, int fila, int columna)
@@ -14,7 +18,8 @@ public:
 
 
 
-
+    //el movimento de la torre no cuenta el numero de casillas, se asegura de que solo se mueve en un eje y de que no pasa por encima de ninguna pieza
+    //tambien revisa que no termine encima de ninguna casilla amiga
     bool MovimientoValido(int NuevaFila, int NuevaColumna, PiezaMadre* tablero[HEIGHT][WIDTH]) override {
         if (fila == NuevaFila || columna == NuevaColumna) {
             int diffFila = NuevaFila - fila;

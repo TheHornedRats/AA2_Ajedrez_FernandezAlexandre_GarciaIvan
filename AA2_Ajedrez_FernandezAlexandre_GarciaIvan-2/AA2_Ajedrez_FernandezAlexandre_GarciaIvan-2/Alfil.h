@@ -3,17 +3,21 @@
 #include "Piezas.h"
 #include "config.h"
 
+
+
+//La clase alfil hereda de su clase madre
 class Alfil : public PiezaMadre {
 
 public:
 	Alfil(char color, int fila, int columna)
 		: PiezaMadre(color, fila, columna) {
 	}
-
+    //esto lo que hace es retornar B o b dependiendo del color del alfil
 	char GetSimbolo() const override {
 		return(color == 'B') ? 'B' : 'b';
 
 	}
+    //esta funcion revisa que el movimiento del alfil sea valido, los puntos clave son que mueva en diagonal, que no salte sobre otras piezas y que termine el movimiento en una casilla vacia o con una ficha enemiga
 
     bool MovimientoValido(int NuevaFila, int NuevaColumna, PiezaMadre* tablero[HEIGHT][WIDTH]) override {
         int DiffFila = abs(NuevaFila - fila);

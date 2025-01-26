@@ -4,12 +4,13 @@
 #include "Piezas.h"
 #include "config.h"
 
+//esta clase hereda de PiezaMadre
 class Reina : public PiezaMadre {
 public:
     Reina(char color, int fila, int columna)
         : PiezaMadre(color, fila, columna) {
     }
-
+    //devuelve Q para las blancas y q para las negras
     char GetSimbolo() const override {
         return (color == 'B') ? 'Q' : 'q';
     }
@@ -23,7 +24,7 @@ public:
             return false;
         }
 
-        // Movimiento válido como Torre o Alfil
+        // el movimiento de la reina es el movimiento del alfil o el de la torre
         if (DiffFila == DiffColumna || fila == NuevaFila || columna == NuevaColumna) {
             int stepFila = (NuevaFila - fila == 0) ? 0 : (NuevaFila - fila) / abs(NuevaFila - fila);
             int stepColumna = (NuevaColumna - columna == 0) ? 0 : (NuevaColumna - columna) / abs(NuevaColumna - columna);
@@ -34,10 +35,12 @@ public:
             // Verificar todas las casillas en el camino
             while (currentFila != NuevaFila || currentColumna != NuevaColumna) {
                 if (currentFila < 0 || currentFila >= HEIGHT || currentColumna < 0 || currentColumna >= WIDTH) {
-                    return false; // Fuera de los límites
+                    // Fuera de los límites
+                    return false; 
                 }
                 if (tablero[currentFila][currentColumna] != nullptr) {
-                    return false; // Hay una pieza bloqueando el camino
+                    // Hay una pieza bloqueando el camino
+                    return false; 
                 }
                 currentFila += stepFila;
                 currentColumna += stepColumna;

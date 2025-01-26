@@ -3,18 +3,23 @@
 #include "config.h"
 
 #include "Piezas.h"
+
+
+
+//Caballo hereda de la clase PiezaMadre
 class Caballo : public PiezaMadre {
 public:
 	Caballo(char color, int fila, int columna)
 		: PiezaMadre(color, fila, columna) {
 	}
 
+	// retorna 'N' para los blancos y 'n' para los negros
 	char GetSimbolo() const override {
 		return(color == 'B') ? 'N' : 'n';
 
 	}
 
-
+	//verifica que el caballo realiza un movimiento de L 
 	bool MovimientoValido(int NuevaFila, int NuevaColumna, PiezaMadre* tablero[HEIGHT][WIDTH]) override {
 		//Con esto calculo el numero total y absoluto de las casillas que se movera el caballo
 		int diffFila = abs(NuevaFila - fila);

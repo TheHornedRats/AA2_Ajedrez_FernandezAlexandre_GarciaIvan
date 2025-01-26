@@ -28,7 +28,7 @@ void Juego() {
         // Imprimir el tablero
         ImprimirTablero(tablero);
 
-        // Mostrar de quién es el turno
+        // Mostrar de quien es el turno
         std::cout << "Turno del jugador: " << ((TurnoActual == 'B') ? "Blancas" : "Negras") << std::endl;
 
         // Buscar al rey del turno actual
@@ -64,13 +64,13 @@ void Juego() {
         std::cout << "Introduce fila y columna de destino (ejemplo: 3 5): ";
         std::cin >> FilaDestino >> ColumnaDestino;
 
-        // Ajustar índices para el array
+        // Ajustar indices para el array
         FilaOrigen -= 1;
         ColumnaOrigen -= 1;
         FilaDestino -= 1;
         ColumnaDestino -= 1;
 
-        // Validar límites del tablero
+        // Validar limites del tablero
         if (FilaOrigen < 0 || FilaOrigen >= HEIGHT || ColumnaOrigen < 0 || ColumnaOrigen >= WIDTH ||
             FilaDestino < 0 || FilaDestino >= HEIGHT || ColumnaDestino < 0 || ColumnaDestino >= WIDTH) {
             std::cout << "Movimiento fuera del tablero, vuelve a intentarlo.\n";
@@ -104,7 +104,7 @@ bool MoverPieza(int FilaOrigen, int ColumnaOrigen, int FilaDestino, int ColumnaD
     }
 
     if (!pieza->MovimientoValido(FilaDestino, ColumnaDestino, tablero)) {
-        std::cout << "Este movimiento no es válido para esta pieza.\n";
+        std::cout << "Este movimiento no es valido para esta pieza.\n";
         return false;
     }
 
@@ -119,17 +119,17 @@ bool MoverPieza(int FilaOrigen, int ColumnaOrigen, int FilaDestino, int ColumnaD
     tablero[FilaDestino][ColumnaDestino] = pieza;
     tablero[FilaOrigen][ColumnaOrigen] = nullptr;
 
-    // Actualizar la posición de la pieza
+    // Actualizar la posicion de la pieza
     pieza->fila = FilaDestino;
     pieza->columna = ColumnaDestino;
 
-    // Promoción de peón a reina
-    if (dynamic_cast<Peon*>(pieza) != nullptr) { // Si es un Peón
+    // Promocion de peon a reina
+    if (dynamic_cast<Peon*>(pieza) != nullptr) { // Si es un Peon
         if ((pieza->color == 'B' && FilaDestino == HEIGHT - 1) || (pieza->color == 'N' && FilaDestino == 0)) {
-            // Promoción directa sin borrar la instancia
+            // Promocion directa sin borrar la instancia
             pieza = new Reina(pieza->color, FilaDestino, ColumnaDestino);
             tablero[FilaDestino][ColumnaDestino] = pieza; // Asignar la Reina al tablero
-            std::cout << "¡Un peón ha sido promovido a Reina de color "
+            std::cout << "¡Un peon ha sido promovido a Reina de color "
                 << ((pieza->color == 'B') ? "Blanco" : "Negro") << "!\n";
         }
     }

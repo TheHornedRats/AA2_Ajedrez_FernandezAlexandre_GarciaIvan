@@ -56,7 +56,7 @@ void ImprimirTablero(PiezaMadre* tablero[HEIGHT][WIDTH]) {
 	std::cout << "  ";
 	for (int j = 0; j < WIDTH; j++)
 	{
-		std::cout << static_cast<char>('A' + j) << " ";
+		std::cout << (j+1) << " ";
 	}
 	std::cout << std::endl;
 

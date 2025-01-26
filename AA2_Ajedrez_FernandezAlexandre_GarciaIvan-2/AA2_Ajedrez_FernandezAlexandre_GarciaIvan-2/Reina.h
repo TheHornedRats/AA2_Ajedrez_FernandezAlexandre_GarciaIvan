@@ -21,13 +21,36 @@ public:
 
 	bool MovimientoValido(int NuevaFila, int NuevaColumna, PiezaMadre* tablero[HEIGHT][WIDTH]) override {
 
-		//La reina puede usar o el movimiento de la torre o la del alfil
+		int DiffFila = abs(NuevaFila - fila);
+		int DiffColumna = abs(NuevaColumna - columna);
 
-		return ((fila== NuevaFila || columna == NuevaColumna) ||
-			(abs(NuevaFila - fila) == abs(NuevaColumna - columna))) &&
-			(NuevaFila >= 0 && NuevaFila < 8) &&
-			(NuevaColumna >= 0 && NuevaColumna < 8);
-	}
+			
+        // La Reina se mueve en línea recta (como una Torre) o en diagonal (como un Alfil)
+        if (DiffFila == DiffColumna || fila == NuevaFila || columna == NuevaColumna) {
+            // Determinar la dirección del movimiento
+            int stepFila = (NuevaFila - fila == 0) ? 0 : (NuevaFila - fila) / abs(NuevaFila - fila);
+            int stepColumna = (NuevaColumna - columna == 0) ? 0 : (NuevaColumna - columna) / abs(NuevaColumna - columna);
+
+            int currentFila = fila + stepFila;
+            int currentColumna = columna + stepColumna;
+
+            // Verificar cada casilla en el camino hacia el destino
+            while (currentFila != NuevaFila || currentColumna != NuevaColumna) {
+                if (tablero[currentFila][currentColumna] != nullptr) {
+                    return false; // Hay una pieza bloqueando el camino
+                }
+                currentFila += stepFila;
+                currentColumna += stepColumna;
+            }
+
+            // Verificar la casilla destino
+            if (tablero[NuevaFila][NuevaColumna] == nullptr || tablero[NuevaFila][NuevaColumna]->color != color) {
+                return true; // Movimiento válido si la casilla está vacía o tiene una pieza enemiga
+            }
+        }
+
+        return false; // Movimiento inválido
+    }
 };
 
 #endif // !REINA_H

@@ -15,13 +15,33 @@ public:
 
 	}
 
-	bool MovimientoValido(int NuevaFila, int NuevaColumna, PiezaMadre* tablero[HEIGHT][WIDTH]) override {
-		//Aquest moviment restringeix el moviment del alfil en diagonal pero sense fixarse en el total de caselles que es mou
+    bool MovimientoValido(int NuevaFila, int NuevaColumna, PiezaMadre* tablero[HEIGHT][WIDTH]) override {
+        int DiffFila = abs(NuevaFila - fila);
+        int DiffColumna = abs(NuevaColumna - columna);
 
-		return(abs(NuevaFila - fila) == abs(NuevaColumna - columna)) &&
-			(NuevaFila >= 0 && NuevaFila < 8) &&
-			(NuevaColumna >= 0 && NuevaColumna < 8);
-	}
+        if (DiffFila == DiffColumna) {
+            int stepFila = (NuevaFila - fila) / abs(NuevaFila - fila);
+            int stepColumna = (NuevaColumna - columna) / abs(NuevaColumna - columna);
+
+            int currentFila = fila + stepFila;
+            int currentColumna = columna + stepColumna;
+
+            while (currentFila != NuevaFila || currentColumna != NuevaColumna) {
+                if (tablero[currentFila][currentColumna] != nullptr) {
+                    return false; // Hay una pieza bloqueando el camino
+                }
+                currentFila += stepFila;
+                currentColumna += stepColumna;
+            }
+
+            if (tablero[NuevaFila][NuevaColumna] == nullptr || tablero[NuevaFila][NuevaColumna]->color != color) {
+                return true; // Movimiento válido
+            }
+        }
+
+        return false;
+    }
+
 };
 
 #endif // !ALFIL_H

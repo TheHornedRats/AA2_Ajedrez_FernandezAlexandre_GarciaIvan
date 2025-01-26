@@ -15,15 +15,30 @@ public:
 
 
 
-	bool MovimientoValido(int NuevaFila, int NuevaColumna, PiezaMadre* tablero[HEIGHT][WIDTH]) override {
-		//Basicament el que la torre mira es si la columna o la fila segueix sent la mateixa al final del moviment
-		//Despres, com totes les fitxes, comprova que segueixi dins del taulell
+    bool MovimientoValido(int NuevaFila, int NuevaColumna, PiezaMadre* tablero[HEIGHT][WIDTH]) override {
+        if (fila == NuevaFila || columna == NuevaColumna) {
+            int stepFila = (NuevaFila - fila == 0) ? 0 : (NuevaFila - fila) / abs(NuevaFila - fila);
+            int stepColumna = (NuevaColumna - columna == 0) ? 0 : (NuevaColumna - columna) / abs(NuevaColumna - columna);
 
-		return (fila == NuevaFila || columna == NuevaColumna) &&
-			(NuevaFila >= 0 && NuevaFila < 8) &&
-			(NuevaColumna >= 0 && NuevaColumna < 8);
+            int currentFila = fila + stepFila;
+            int currentColumna = columna + stepColumna;
 
-	}
+            while (currentFila != NuevaFila || currentColumna != NuevaColumna) {
+                if (tablero[currentFila][currentColumna] != nullptr) {
+                    return false; // Hay una pieza bloqueando el camino
+                }
+                currentFila += stepFila;
+                currentColumna += stepColumna;
+            }
+
+            if (tablero[NuevaFila][NuevaColumna] == nullptr || tablero[NuevaFila][NuevaColumna]->color != color) {
+                return true; // Movimiento válido
+            }
+        }
+
+        return false;
+    }
+
 };
 #endif // !TORRE_H
 

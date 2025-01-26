@@ -82,7 +82,7 @@ void Juego() {
             TurnoActual = (TurnoActual == 'B') ? 'N' : 'B'; // Cambiar turno
         }
         else {
-            std::cout << "Movimiento no válido. Intenta de nuevo.\n";
+            std::cout << "Movimiento no valido. Intenta de nuevo.\n";
         }
     }
 

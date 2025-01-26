@@ -10,6 +10,10 @@ public:
 		: PiezaMadre(color, fila, columna) {
 	}
 
+	char GetSimbolo() const override {
+		return(color == 'B') ? 'B' : 'b';
+
+	}
 
 	bool MovimientoValido(int NuevaFila, int NuevaColumna, PiezaMadre* tablero[HEIGHT][WIDTH]) override {
 		//Aquest moviment restringeix el moviment del alfil en diagonal pero sense fixarse en el total de caselles que es mou

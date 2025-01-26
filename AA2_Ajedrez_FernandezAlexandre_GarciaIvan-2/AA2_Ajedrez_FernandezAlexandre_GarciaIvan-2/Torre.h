@@ -7,6 +7,14 @@ public:
 	Torre(char color, int fila, int columna)
 		: PiezaMadre(color, fila, columna) {}
 
+	char GetSimbolo() const override {
+		return(color == 'B') ? 'R' : 'r';
+
+	}
+
+
+
+
 	bool MovimientoValido(int NuevaFila, int NuevaColumna, PiezaMadre* tablero[HEIGHT][WIDTH]) override {
 		//Basicament el que la torre mira es si la columna o la fila segueix sent la mateixa al final del moviment
 		//Despres, com totes les fitxes, comprova que segueixi dins del taulell

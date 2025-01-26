@@ -2,6 +2,10 @@
 #define REINA_H
 #include "Piezas.h"
 #include "config.h"
+#include <vector>
+#include <iostream>
+#include <iterator>
+
 
 class Reina : public PiezaMadre {
 
@@ -10,6 +14,10 @@ public:
 		: PiezaMadre(color, fila, columna) {
 	}
 
+	char GetSimbolo() const override {
+		return(color == 'B') ? 'Q' : 'q';
+
+	}
 
 	bool MovimientoValido(int NuevaFila, int NuevaColumna, PiezaMadre* tablero[HEIGHT][WIDTH]) override {
 

@@ -9,6 +9,12 @@ public:
 		: PiezaMadre(color, fila, columna) {
 	}
 
+	char GetSimbolo() const override {
+		return(color == 'B') ? 'N' : 'n';
+
+	}
+
+
 	bool MovimientoValido(int NuevaFila, int NuevaColumna, PiezaMadre* tablero[HEIGHT][WIDTH]) override {
 		//Con esto calculo el numero total y absoluto de las casillas que se movera el caballo
 		int diffFila = abs(NuevaFila - fila);

@@ -10,7 +10,10 @@ public:
 	Peon(char color, int fila, int columna)
 		: PiezaMadre(color, fila, columna) {
 	}
+	char GetSimbolo() const override {
+		return(color == 'B') ? 'P' : 'p';
 
+	}
 
 	bool MovimientoValido(int NuevaFila, int NuevaColumna, PiezaMadre* tablero[HEIGHT][WIDTH]) override {
 		//en esta logica se da por echo que los peones siempre avanzaran en linia recta, a menos que capturen pieza

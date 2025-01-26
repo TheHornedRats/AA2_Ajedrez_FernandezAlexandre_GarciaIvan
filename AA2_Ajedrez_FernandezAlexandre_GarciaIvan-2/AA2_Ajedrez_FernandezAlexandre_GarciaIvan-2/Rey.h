@@ -15,6 +15,11 @@ public:
 		//estos corchetes finales indican que el constructor nonhace nada mas que crear la clase
 		:PiezaMadre(color, fila, columna) {
 	}
+	char GetSimbolo() const override {
+		return(color == 'B') ? 'K' : 'k';
+
+	}
+
 
 	//ahora creamos el metodo para comprovar el movimiento valido del rey y aprovechamos que es virtual para personalizarlo para esta clase
 	bool MovimientoValido(int NuevaFila, int NuevaColumna, PiezaMadre* tablero[HEIGHT][WIDTH]) override {

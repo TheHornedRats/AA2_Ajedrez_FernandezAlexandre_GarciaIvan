@@ -29,18 +29,20 @@ public:
 	//el resto de piezas aunque no utilizen el tablero usaran este metodo para seguir validando que la casilla donde mueven no esta ocupada por una ficha amiga 
 	virtual bool MovimientoValido(int NuevaFila, int NuevaColumna, PiezaMadre* tablero[HEIGHT][WIDTH])
 	{
+		if (NuevaFila < 0 || NuevaFila >= HEIGHT || NuevaColumna < 0 || NuevaColumna >= WIDTH)
+		{
+			return false;
+		}
 		if (tablero[NuevaFila][NuevaColumna] != nullptr && tablero[NuevaFila][NuevaColumna]->color == this->color) {
 			return false;
 		}
 		return true;
-
-
 	}
+	virtual char GetSimbolo() const = 0;
+
 	// esto de aquí he visto que se usa para evitar fugas de memoria, no se exactamente que són pero parece importante
 	//Creamos el DESTRUCTOR VIRTUAL
 	virtual ~PiezaMadre() {}
 
-
-#endif; //PIEZAS_H
-
 };
+#endif //PIEZAS_H

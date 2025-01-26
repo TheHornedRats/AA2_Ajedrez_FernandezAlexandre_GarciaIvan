@@ -1,5 +1,5 @@
 #include "GameLogic.h"
-#include <iostream>>
+#include <iostream>
 #include "config.h"
 
 bool MoverPieza(int FilaOrigen, int ColumnaOrigen, int FilaDestino, int ColumnaDestino, PiezaMadre* tablero[HEIGHT][WIDTH]) {

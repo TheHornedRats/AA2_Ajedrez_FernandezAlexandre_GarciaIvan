@@ -1,6 +1,47 @@
 #include "GameLogic.h"
 #include <iostream>
 #include "config.h"
+#include "Rey.h"
+void Juego() {
+	//esta es la funcion que contiene el juego en si, su bucle
+	//empezamos por crear el tablero
+
+	PiezaMadre* tablero[HEIGHT][WIDTH];
+	InicializarTablero(tablero);
+
+	bool JuegoEnCurso = true;
+	char TurnoActual = 'B';
+
+	while (JuegoEnCurso)
+	{ //mientrras el juego este en curso... empezamos imprimiendo el tablero
+		ImprimirTablero(tablero);
+
+		//Mostramos a quien le toca
+		std::cout << "Turno del jugador :" << (TurnoActual == 'B') ? "Blancas" : "Negras") << std::endl;
+
+		//Vamos a encontrar al rey de quien le toca para comprovar si esta en jaque
+		Rey* ReyActual = nullptr;
+		for (int i = 0; i < HEIGHT; i++)
+		{
+			for (int j = 0; j < WIDTH; j++) {
+				if (tablero [i][j] != nullptr && tablero[i][j]->GetSimbolo()==(TurnoActual == 'B' ? 'K' : 'k'))
+				{
+					ReyActual = dynamic_cast<Rey*>(tablero[i][j]);
+				}
+			
+			}
+			
+		}
+		bool enJaque = false;
+		bool enJaqueMate = false;
+		if (ReyActual != nullptr)
+		{
+
+		}
+	}
+}
+
+
 
 bool MoverPieza(int FilaOrigen, int ColumnaOrigen, int FilaDestino, int ColumnaDestino, PiezaMadre* tablero[HEIGHT][WIDTH]) {
 	//este es el metodo para mover las piezas, lo primero que hara es comprovar que en la casilla que selecciones haya una pieza que puedas mover.

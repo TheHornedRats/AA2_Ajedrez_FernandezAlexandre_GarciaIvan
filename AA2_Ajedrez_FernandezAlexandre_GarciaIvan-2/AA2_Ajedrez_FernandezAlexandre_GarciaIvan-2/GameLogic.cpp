@@ -36,7 +36,7 @@ void Juego() {
 		ImprimirTablero(tablero);
 
 		//Mostramos a quien le toca
-		std::cout << "Turno del jugador :" << (TurnoActual == 'B') ? "Blancas" : "Negras") << std::endl;
+		std::cout << "Turno del jugador :" << ((TurnoActual == 'B') ? "Blancas" : "Negras" ) << std::endl;
 
 		//Vamos a encontrar al rey de quien le toca para comprovar si esta en jaque
 		Rey* ReyActual = nullptr;
@@ -69,10 +69,22 @@ void Juego() {
 
 		}
 		int FilaOrigen, ColumnaOrigen, FilaDestino, ColumnaDestino;
-		std::cout << "Introduce fila y columna de la pieza que quieres mover (2 5):";
+		std::cout << "Introduce fila y columna de la pieza que quieres mover (2 5): \n";
 		std::cin >> FilaOrigen >> ColumnaOrigen;
 		std::cout << "Introduce fila y columna de la casilla a la que la quieres mover";
 		std::cin >> FilaDestino >> ColumnaDestino;
+
+		if (FilaOrigen < 0 || FilaOrigen >= HEIGHT || ColumnaOrigen < 0 || ColumnaOrigen >= WIDTH ||
+			FilaDestino < 0 || FilaDestino >= HEIGHT || ColumnaDestino < 0 || ColumnaDestino >= WIDTH)
+		{
+			std::cout << "Movimiento fuera del tablero, vuelve a probar \n";
+			continue;
+
+
+		}
+
+
+
 
 		if (MoverPieza(FilaOrigen, ColumnaOrigen, FilaDestino, ColumnaDestino, tablero))
 		{

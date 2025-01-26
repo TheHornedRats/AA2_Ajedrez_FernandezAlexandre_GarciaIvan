@@ -74,6 +74,16 @@ void Juego() {
 		std::cout << "Introduce fila y columna de la casilla a la que la quieres mover";
 		std::cin >> FilaDestino >> ColumnaDestino;
 
+		FilaOrigen -= 1;
+		ColumnaOrigen -= 1;
+		FilaDestino -= 1;
+		ColumnaDestino -= 1;
+
+
+
+
+
+
 		if (FilaOrigen < 0 || FilaOrigen >= HEIGHT || ColumnaOrigen < 0 || ColumnaOrigen >= WIDTH ||
 			FilaDestino < 0 || FilaDestino >= HEIGHT || ColumnaDestino < 0 || ColumnaDestino >= WIDTH)
 		{
@@ -86,7 +96,7 @@ void Juego() {
 
 
 
-		if (MoverPieza(FilaOrigen, ColumnaOrigen, FilaDestino, ColumnaDestino, tablero))
+		if (MoverPieza(FilaOrigen, ColumnaOrigen, FilaDestino, ColumnaDestino, tablero, TurnoActual))
 		{
 			TurnoActual = (TurnoActual == 'B') ? 'N' : 'B';
 		}
@@ -101,7 +111,7 @@ void Juego() {
 
 
 
-bool MoverPieza(int FilaOrigen, int ColumnaOrigen, int FilaDestino, int ColumnaDestino, PiezaMadre* tablero[HEIGHT][WIDTH]) {
+bool MoverPieza(int FilaOrigen, int ColumnaOrigen, int FilaDestino, int ColumnaDestino, PiezaMadre* tablero[HEIGHT][WIDTH], char TurnoActual) {
 	//este es el metodo para mover las piezas, lo primero que hara es comprovar que en la casilla que selecciones haya una pieza que puedas mover.
 	if (tablero[FilaOrigen][ColumnaOrigen] == nullptr)
 	{
@@ -111,6 +121,18 @@ bool MoverPieza(int FilaOrigen, int ColumnaOrigen, int FilaDestino, int ColumnaD
 //ahora vamos a reconocer que pieza es la que se va a mover
 
 	PiezaMadre* pieza = tablero[FilaOrigen][ColumnaOrigen];
+
+	if (pieza->color != TurnoActual)
+	{
+		std::cout << "No puedes mover las piezas de otro jugador \n";
+		return false;
+
+
+	}
+
+
+
+
 
 	//y ahora comprovamos si la pieza seleccionada se pude mover a la casilla escogida
 	if (!pieza->MovimientoValido(FilaDestino, ColumnaDestino, tablero))

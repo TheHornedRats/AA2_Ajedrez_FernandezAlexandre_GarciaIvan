@@ -23,27 +23,27 @@ public:
 			if (color == 'B')
 			{
 				//aquesta part serveix perque en la posicio incial els peon puguin moure dues caselles
-				return (NuevaFila == fila - 1 || (fila == 6 && NuevaFila == fila - 2)) &&
+				return (NuevaFila == fila + 1 || (fila == 1 && NuevaFila == fila + 2)) &&
 					tablero[NuevaFila][NuevaColumna] == nullptr; //amb això m'aseguro que només pot avançar endevant si la casella està buida
 			}
 			else
 			{
-				return (NuevaFila == fila + 1 || (fila == 2 && NuevaFila == fila + 2)) &&
+				return (NuevaFila == fila - 1 || (fila == 6 && NuevaFila == fila - 2)) &&
 					tablero[NuevaFila][NuevaColumna] == nullptr; 
 			}
 		}
 
-		if (abs(NuevaColumna - columna) ==1 ) 
+		if (abs(NuevaColumna - columna) == 1 ) 
 		{
 			if (color == 'B') {
-				return NuevaFila == fila - 1 &&
+				return NuevaFila == fila + 1 &&
 					tablero[NuevaFila][NuevaColumna] != nullptr &&
 					tablero[NuevaFila][NuevaColumna]->color != color;
 
 			}
 			else
 			{
-				return NuevaFila == fila + 1 &&
+				return NuevaFila == fila - 1 &&
 					tablero[NuevaFila][NuevaColumna] != nullptr &&
 					tablero[NuevaFila][NuevaColumna]->color != color;
 

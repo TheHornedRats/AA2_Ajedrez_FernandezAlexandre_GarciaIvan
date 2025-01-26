@@ -33,14 +33,24 @@ public:
 		//Y segundo que no termine fuera de los límites del tablero
 		if (DiffFila <= 1 && DiffColumna <= 1)
 		{
-			if (NuevaFila >= 1 && NuevaFila < HEIGHT && NuevaColumna >= 1 && NuevaColumna < WIDTH) {
+			if (NuevaFila >= 0 && NuevaFila < HEIGHT && NuevaColumna >= 0 && NuevaColumna < WIDTH) {
 				//esto comprueba que el rey no se pueda mover encima de una casilla con una pieza amiga (de su mismo color)
 				if (tablero[NuevaFila][NuevaColumna] != nullptr && tablero[NuevaFila][NuevaColumna] -> color == color)
 				{
 					return false;
 
 				}
-				return !EstaEnJaque(NuevaFila, NuevaColumna, tablero, color);
+
+				PiezaMadre* piezaTemporal = tablero[NuevaFila][NuevaColumna];
+				tablero[NuevaFila][NuevaColumna] = tablero[fila][columna];
+				tablero[fila][columna] = nullptr;
+				bool enJaque = EstaEnJaque(NuevaFila, NuevaColumna, tablero, color);
+
+				tablero[fila][columna] = tablero[NuevaFila][NuevaColumna];
+				tablero[NuevaFila][NuevaColumna] = piezaTemporal;
+				return!enJaque;
+
+				
 
 		}
 
@@ -49,9 +59,9 @@ public:
 	}
 	//este metodo comprueva antes de moverse si la casilla en la que se va a ir el rey esta amenazada. Para hacerlo revisa todo el tablero y escoge el metodo de las fichas del color contrario para calcular si desde sus casillas actuales seria legal un movimiento a la casilla donde esta iendo el rey. Dicho de otra menera, revisar el Jaque
 	bool EstaEnJaque(int fila, int columna, PiezaMadre* tablero[HEIGHT][WIDTH], char colorRey) {
-		for (int i = 1; i < HEIGHT; i++)
+		for (int i = 0; i < HEIGHT; i++)
 		{
-			for (int j = 1; j < WIDTH; j++) {
+			for (int j = 0; j < WIDTH; j++) {
 				if (tablero[i][j] != nullptr && tablero[i][j]->color != colorRey)
 				{
 					if (tablero[i][j]->MovimientoValido(fila, columna, tablero)) {
@@ -74,9 +84,8 @@ public:
 				int NuevaFila = fila + i;
 				int NuevaColumna = columna + j;
 				//verifica la distancia
-				if (NuevaFila >= 1 && NuevaFila < HEIGHT && NuevaColumna >= 1 && NuevaColumna < WIDTH)
+				if (NuevaFila >= 0 && NuevaFila < HEIGHT && NuevaColumna >= 0 && NuevaColumna < WIDTH)
 				{
-					//verifica si sigue dejandolo en jaque
 					if (MovimientoValido(NuevaFila, NuevaColumna, tablero)) {
 						return false; //devuelve false si almenos hay una oportunidad de salir del jaque
 
@@ -86,15 +95,15 @@ public:
 				}
 			}
 		}
-		for (int i = 1; i < HEIGHT; i++)
+		for (int i = 0; i < HEIGHT; i++)
 		{
-			for (int j = 1; j < WIDTH; j++) {
-				if (tablero[i][j] != nullptr && tablero[i][j]->color == color) {}
+			for (int j = 0; j < WIDTH; j++) {
+				if (tablero[i][j] != nullptr && tablero[i][j]->color == color) 
 				{
 					//revisa si la ficha puede hacer algun movimiento para sacar al rey del jaque
-					for (int x = 1; x < HEIGHT; x++)
+					for (int x = 0; x < HEIGHT; x++)
 					{
-						for (int y = 1; y < WIDTH; y++) {
+						for (int y = 0; y < WIDTH; y++) {
 							if (tablero[i][j]->MovimientoValido(x, y, tablero))
 							{
 								//simulo el movmiento para despues comprovar si el rey sigue en jaque

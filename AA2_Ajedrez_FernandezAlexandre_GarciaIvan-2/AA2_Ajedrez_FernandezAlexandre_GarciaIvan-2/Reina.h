@@ -28,8 +28,12 @@ public:
         // La Reina se mueve en línea recta (como una Torre) o en diagonal (como un Alfil)
         if (DiffFila == DiffColumna || fila == NuevaFila || columna == NuevaColumna) {
             // Determinar la dirección del movimiento
-            int stepFila = (NuevaFila - fila == 0) ? 0 : (NuevaFila - fila) / abs(NuevaFila - fila);
-            int stepColumna = (NuevaColumna - columna == 0) ? 0 : (NuevaColumna - columna) / abs(NuevaColumna - columna);
+            int diffFila = NuevaFila - fila;
+            int diffColumna = NuevaColumna - columna;
+
+            int stepFila = (diffFila == 0) ? 0 : diffFila / abs(diffFila);
+            int stepColumna = (diffColumna == 0) ? 0 : diffColumna / abs(diffColumna);
+
 
             int currentFila = fila + stepFila;
             int currentColumna = columna + stepColumna;

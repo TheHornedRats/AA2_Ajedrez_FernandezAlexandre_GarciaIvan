@@ -68,6 +68,12 @@ void Juego() {
 			continue;
 
 		}
+		else if (enJaque) {
+			std::cout << "\n ¡Cuidado, el Rey está en Jaque! \n" << std::endl;
+		}
+		else {
+			std::cout << "\n El Rey está seguro. \n" << std::endl;
+		}
 		int FilaOrigen, ColumnaOrigen, FilaDestino, ColumnaDestino;
 		std::cout << "Introduce fila y columna de la pieza que quieres mover (2 5): \n";
 		std::cin >> FilaOrigen >> ColumnaOrigen;

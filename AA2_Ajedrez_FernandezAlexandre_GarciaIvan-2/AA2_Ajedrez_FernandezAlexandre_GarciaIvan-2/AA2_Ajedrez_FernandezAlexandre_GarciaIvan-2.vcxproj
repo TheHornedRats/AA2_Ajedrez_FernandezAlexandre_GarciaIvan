@@ -129,14 +129,18 @@
   <ItemGroup>
     <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Tablero.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Alfil.h" />
     <ClInclude Include="Caballo.h" />
     <ClInclude Include="config.h" />
     <ClInclude Include="GameLogic.h" />
     <ClInclude Include="Peon.h" />
     <ClInclude Include="Piezas.h" />
+    <ClInclude Include="Reina.h" />
     <ClInclude Include="Rey.h" />
+    <ClInclude Include="Tablero.h" />
     <ClInclude Include="Torre.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

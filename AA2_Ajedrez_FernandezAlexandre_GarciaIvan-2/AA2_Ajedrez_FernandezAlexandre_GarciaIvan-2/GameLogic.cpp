@@ -2,6 +2,25 @@
 #include <iostream>
 #include "config.h"
 #include "Rey.h"
+
+void limpiarTablero(PiezaMadre* tablero[HEIGHT][WIDTH]) {
+	for (int i = 0; i < HEIGHT; i++)
+	{
+		for (int j = 0; j < WIDTH; j++) {
+			if (tablero [i][j] != nullptr)
+			{
+				delete tablero[i][j];
+				tablero[i][j] = nullptr;
+
+
+			}
+	}
+
+	}
+}
+
+
+
 void Juego() {
 	//esta es la funcion que contiene el juego en si, su bucle
 	//empezamos por crear el tablero
@@ -34,11 +53,38 @@ void Juego() {
 		}
 		bool enJaque = false;
 		bool enJaqueMate = false;
-		if (ReyActual != nullptr)
+		if (ReyActual != nullptr){
+			enJaque = ReyActual->EstaEnJaque(ReyActual->fila, ReyActual->columna, tablero, TurnoActual);
+			if (enJaque)
+			{
+				std::cout << "\n ¡Cuidado, el Rey esta en Jaque! \n" << std::endl;
+				enJaqueMate = ReyActual->EstaEnJaqueMate(tablero);
+			}
+		}
+		if (enJaqueMate)
 		{
+			std::cout << "\n ¡Jaque Mate! Ganan las: " << (TurnoActual == 'B' ? "Negras" : "Blancas") << std::endl;
+			JuegoEnCurso = false;
+			continue;
+
+		}
+		int FilaOrigen, ColumnaOrigen, FilaDestino, ColumnaDestino;
+		std::cout << "Introduce fila y columna de la pieza que quieres mover (2 5):";
+		std::cin >> FilaOrigen >> ColumnaOrigen;
+		std::cout << "Introduce fila y columna de la casilla a la que la quieres mover";
+		std::cin >> FilaDestino >> ColumnaDestino;
+
+		if (MoverPieza(FilaOrigen, ColumnaOrigen, FilaDestino, ColumnaDestino, tablero))
+		{
+			TurnoActual = (TurnoActual == 'B') ? 'N' : 'B';
+		}
+		else {
+			std::cout << "Movimiento no valido. Prueba otra vez" << std::endl;
 
 		}
 	}
+	limpiarTablero(tablero);
+
 }
 
 
